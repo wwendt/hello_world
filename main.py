@@ -39,41 +39,41 @@ form="""
 
 
 class MainPage(webapp2.RequestHandler):
-#	def write_form(self, error="", month="", day="", year=""):
-	#	self.response.out.write(form % {"error": error,
-	#									"month": month,
-	#									"day": day,
-	#									"year": year})
- #   def get(self):
-      #  self.response.headers['Content-Type'] = 'text/plain'
-     #   self.response.out.write(form)
-  #  def post(self):
-    #	user_month = valid_month(self.request.get('month'))
-    #	user_day = valid_day(self.request.get('day'))
-    #	user_year = valid_year(self.request.get('year'))
+	def write_form(self, error="", month="", day="", year=""):
+		self.response.out.write(form % {"error": error,
+										"month": month,
+										"day": day,
+										"year": year})
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.out.write(form)
+    def post(self):
+    	user_month = valid_month(self.request.get('month'))
+    	user_day = valid_day(self.request.get('day'))
+    	user_year = valid_year(self.request.get('year'))
 
-    #	if not (user_month and user_day and user_year):
-    #		self.response.out.write(form)
-    #	else:
-    #		self.response.out.write("thanks!  that's a valid day")	
+    	if not (user_month and user_day and user_year):
+    		self.response.out.write(form)
+    	else:
+    		self.response.out.write("thanks!  that's a valid day")	
 
-    #	self.response.out.write("thanks!  That's a totally valid day")
+    	self.response.out.write("thanks!  That's a totally valid day")
     
-   # def valid_month(month):
-    #	if month:
-    #		cap_month = month.capitalize()
-    #		if cap_month in months:
-    #			return cap_month	
-    #def valid_year(year):
-    #	if year and year.isdigit():
-     #   	year = int(year)
-      #  if year >= 1900 and year <= 2020:
-       #     return year
-    #def valid_day(day):
-    #	if day <= 31 & day > 0:
-     # 		print day
-    #	if day > 31 | day <  0: 
-     #   	print none
+    def valid_month(month):
+    	if month:
+    		cap_month = month.capitalize()
+    		if cap_month in months:
+    			return cap_month	
+    def valid_year(year):
+    	if year and year.isdigit():
+        	year = int(year)
+        if year >= 1900 and year <= 2020:
+            return year
+    def valid_day(day):
+    	if day <= 31 & day > 0:
+      		print day
+    	if day > 31 | day <  0: 
+        	print none
 
 
 class TestHandler(webapp2.RequestHandler):
