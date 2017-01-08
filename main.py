@@ -31,7 +31,9 @@ form="""
         Year 
         <input type="text" name="year" ">
     </label>
-    <div></div>
+    <div style="color: red">%(error)s</div>
+    <br>
+    <br>
     <input type="submit" value"Submit">
 
 </form>
@@ -45,20 +47,18 @@ class MainPage(webapp2.RequestHandler):
                                         "month": month,
                                         "day": day,
                                         "year": year})
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write(form)
-    def post(self):
-        user_month = valid_month(self.request.get('month'))
-        user_day = valid_day(self.request.get('day'))
-        user_year = valid_year(self.request.get('year'))
-
-        if not (user_month and user_day and user_year):
-            self.response.out.write(form)
-        else:
-            self.response.out.write("thanks!  that's a valid day")  
-
-        self.response.out.write("thanks!  That's a totally valid day")
+    months = ['January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December']
     
     def valid_month(month):
         if month:
@@ -68,13 +68,31 @@ class MainPage(webapp2.RequestHandler):
     def valid_year(year):
         if year and year.isdigit():
             year = int(year)
-        if year >= 1900 and year <= 2020:
+        if year > 1900 and year < 2020:
             return year
     def valid_day(day):
-        if day <= 31 & day > 0:
-            print day
-        if day > 31 | day <  0: 
+        if day and day.isdigit():
+            day = int(day)
+        if day <= 31 and day >  0: 
             print none
+
+
+    def get(self):
+       # self.response.headers['Content-Type'] = 'text/plain'
+        self.write_form()
+    def post(self):
+        user_month = valid_month(self.request.get('month'))
+        user_day = valid_day(self.request.get('day'))
+        user_year = valid_year(self.request.get('year'))
+
+        if not (user_month and user_day and user_year):
+            self.write_form("that doesn't look valid to me...")
+        else:
+            self.response.out.write("thanks!  that's a valid day")  
+
+        self.response.out.write("thanks!  That's a totally valid day")
+
+    
 
 
 class TestHandler(webapp2.RequestHandler):
