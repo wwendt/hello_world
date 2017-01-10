@@ -21,15 +21,15 @@ form="""
     <br>
     <label>
         Month 
-        <input type="text" name="month" ">
+        <input type="text" name="month" value="%(month)s">
     </label>
     <label>
         Day 
-        <input type="text" name="day" ">
+        <input type="text" name="day" value="%(day)s">
     </label>
     <label>
         Year 
-        <input type="text" name="year" ">
+        <input type="text" name="year" value="%(year)s">
     </label>
     <div style="color: red">%(error)s</div>
     <br>
@@ -75,7 +75,6 @@ class MainPage(webapp2.RequestHandler):
             day = int(day)
         if day <= 31 and day >  0: 
             print none
-
 
     def get(self):
        # self.response.headers['Content-Type'] = 'text/plain'
